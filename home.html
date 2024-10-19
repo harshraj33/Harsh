@@ -6,20 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Your Name - IT Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
+            background-color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         header {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #333;
             color: white;
-            padding: 20px;
             text-align: center;
+            flex-direction: column;
         }
 
         nav {
@@ -47,16 +55,26 @@
             background-color: #f4f4f4;
         }
 
-        .intro h1 {
-            margin-top: 0;
-        }
-
         .projects, .experience, .skills, .contact {
             padding: 60px 20px;
         }
 
-        .project-item, .experience-item {
-            margin-bottom: 20px;
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-item {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         footer {
@@ -79,13 +97,63 @@
         .btn:hover {
             background-color: #0056b3;
         }
+
+        /* Smooth animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1, .project-item, .experience-item, .btn {
+            animation: fadeInUp 0.8s ease-in-out;
+        }
+
+        /* Skills Progress Bar */
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 20px;
+            height: 20px;
+            width: 100%;
+        }
+
+        .progress {
+            background-color: #007BFF;
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.4s ease;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        body.dark-mode a {
+            color: #007BFF;
+        }
+
+        body.dark-mode .project-item {
+            background-color: #444;
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
     <header>
         <h1>Harsh Raj Singh</h1>
-        <p>IT Specialist | Software Engineer | Technology Enthusiast</p>
+        <h2><span class="dynamic-text">IT Specialist</span>, <span class="dynamic-text">Software Engineer</span>, <span class="dynamic-text">Tech Enthusiast</span></h2>
+        <button id="theme-toggle" class="btn">Toggle Dark Mode</button>
     </header>
 
     <!-- Navigation -->
@@ -105,39 +173,50 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section id="projects" class="projects" data-aos="fade-up">
         <h1>Projects</h1>
-        <div class="project-item">
-            <h3>Project Title 1</h3>
-            <p>Description of the project, technologies used, and the results or achievements.</p>
-            <a href="#" class="btn">View on GitHub</a>
-        </div>
-        <div class="project-item">
-            <h3>Project Title 2</h3>
-            <p>Description of the project, technologies used, and the results or achievements.</p>
-            <a href="#" class="btn">View on GitHub</a>
+        <div class="project-grid">
+            <div class="project-item">
+                <h3>Project Title 1</h3>
+                <p>Description of the project, technologies used, and the results or achievements.</p>
+                <a href="#" class="btn">View on GitHub</a>
+            </div>
+            <div class="project-item">
+                <h3>Project Title 2</h3>
+                <p>Description of the project, technologies used, and the results or achievements.</p>
+                <a href="#" class="btn">View on GitHub</a>
+            </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="experience">
+    <section id="experience" class="experience" data-aos="fade-up">
         <h1>Work Experience</h1>
         <div class="experience-item">
-            <h3>Fresher </h3>
-            
+            <h3>Fresher</h3>
         </div>
-        
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <section id="skills" class="skills" data-aos="fade-up">
         <h1>Skills & Certifications</h1>
-        <p>Python, web dev , java , and more  </p>
-        <p></p>
+        <div class="skill">
+            <p>Python</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 90%;"></div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <p>Web Development</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: 80%;"></div>
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" data-aos="fade-up">
         <h1>Contact Me</h1>
         <p>Feel free to reach out for collaboration, job inquiries, or questions.</p>
         <a href="mailto:youremail@example.com" class="btn">Email Me</a>
@@ -149,5 +228,17 @@
     <footer>
         <p>&copy; 2024 Harsh Raj Singh. All Rights Reserved.</p>
     </footer>
+
+    <!-- AOS (Animate On Scroll) Script -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Dark Mode Toggle
+        const toggleButton = document.getElementById('theme-toggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
